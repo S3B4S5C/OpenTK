@@ -9,10 +9,8 @@ namespace OpenTKHelloWorld
     {
         static void Main(string[] args)
         {
-            using(Game game = new Game())
-            {
-                game.Run();
-            }
+            Game game = new Game(800, 700, "Hola Mundo");
+            game.Run();
         }
     }
 }
