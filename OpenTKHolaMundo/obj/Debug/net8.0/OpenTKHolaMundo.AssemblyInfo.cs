@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OpenTKHolaMundo")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b9e3e66e63440337a9e4d86b7b7e6e653db40805")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0399c3cdc4a305381ec18799da1ca1b712e176b3")]
 [assembly: System.Reflection.AssemblyProductAttribute("OpenTKHolaMundo")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OpenTKHolaMundo")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
