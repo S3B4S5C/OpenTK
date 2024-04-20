@@ -29,3 +29,4 @@ D:\Universidad\ProgGraf\HolaMundo\OpenTKHolaMundo\OpenTKHolaMundo\bin\Debug\net8
 D:\Universidad\ProgGraf\HolaMundo\OpenTKHolaMundo\OpenTKHolaMundo\bin\Debug\net8.0\runtimes\win-x86\native\glfw3.dll
 D:\Universidad\ProgGraf\HolaMundo\OpenTKHolaMundo\OpenTKHolaMundo\obj\Debug\net8.0\OpenTKHolaMundo.csproj.AssemblyReference.cache
 D:\Universidad\ProgGraf\HolaMundo\OpenTKHolaMundo\OpenTKHolaMundo\obj\Debug\net8.0\OpenTKHo.4C59FE43.Up2Date
+D:\Universidad\ProgGraf\HolaMundo\OpenTKHolaMundo\OpenTKHolaMundo\bin\Debug\net8.0\Newtonsoft.Json.dll

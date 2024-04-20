@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "waTX8XMpGGkvqs/4UJAtAb/SS5R8YSJgrdjzs8zFoeJlSXlXEdcJA6QxGtckM7CAla2iz+p+OY2EJlw2c6Wv3w==",
+  "dgSpecHash": "6j0IenP1W5MoT5HIVaVOOVaJjfxDgfICyWw5g/9hXM3nxTuoYX7WEf+y9SCoOLsLmTbQC+jegZBTc/Q5LPOzdA==",
   "success": true,
   "projectFilePath": "D:\\Universidad\\ProgGraf\\HolaMundo\\OpenTKHolaMundo\\OpenTKHolaMundo\\OpenTKHolaMundo.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\sebas\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\sebas\\.nuget\\packages\\opentk\\4.8.2\\opentk.4.8.2.nupkg.sha512",
     "C:\\Users\\sebas\\.nuget\\packages\\opentk.audio.openal\\4.8.2\\opentk.audio.openal.4.8.2.nupkg.sha512",
     "C:\\Users\\sebas\\.nuget\\packages\\opentk.compute\\4.8.2\\opentk.compute.4.8.2.nupkg.sha512",
