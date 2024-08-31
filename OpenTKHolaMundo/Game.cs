@@ -8,6 +8,7 @@ using OpenTK.Windowing.GraphicsLibraryFramework;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using System.Reflection;
 
 namespace OpenTKHolaMundo
 {
@@ -15,9 +16,9 @@ namespace OpenTKHolaMundo
     {
         private Shader shader;
 
-        private Matrix4 view, projection;
+        private Matrix4 view, projection, model;
         private double time;
-
+        private double time2;
 
         //Vertices:
 
@@ -42,6 +43,9 @@ namespace OpenTKHolaMundo
         float[] vertices_vaso;
         uint[] indices_vaso;
 
+        float[] vertices_t_base;
+        float[] vertices_t_arriba;
+        uint[] indices_t;
 
         private Escenario escenario1;
 
@@ -254,7 +258,6 @@ namespace OpenTKHolaMundo
                      -0.03f, 0.04f, 0.03f, 0.9f, 0.7f, 0.9f, // Vértice 15
 
                         };
-
             indices_vaso = new uint[]
                 {
                             //Vaso
@@ -280,31 +283,79 @@ namespace OpenTKHolaMundo
 
                 };
 
+            vertices_t_base = new float[]
+            {
+                0.03f, 0.27f, -0.03f, 0.87f, 0.32f, 0.45f, // Vértice 8
+                0.03f, 0.27f, 0.03f, 0.26f, 0.78f, 0.35f,  // Vértice 9
+                -0.03f, 0.27f, -0.03f, 0.42f, 0.64f, 0.91f, // Vértice 10
+                -0.03f, 0.27f, 0.03f, 0.94f, 0.67f, 0.29f, // Vértice 11
+
+                0.03f, 0.00f, -0.03f, 0.55f, 0.18f, 0.76f, // Vértice 12
+                0.03f, 0.00f, 0.03f, 0.36f, 0.45f, 0.98f,  // Vértice 13
+                -0.03f, 0.00f, -0.03f, 0.77f, 0.48f, 0.24f, // Vértice 14
+                -0.03f, 0.00f, 0.03f, 0.61f, 0.32f, 0.74f,  // Vértice 15
+            };
+
+            vertices_t_arriba = new float[]
+            {
+                0.10f, 0.33f, -0.03f, 0.36f, 0.64f, 0.23f, // Vértice 8
+                0.10f, 0.33f, 0.03f, 0.86f, 0.12f, 0.68f,  // Vértice 9
+                -0.10f, 0.33f, -0.03f, 0.12f, 0.72f, 0.42f, // Vértice 10
+                -0.10f, 0.33f, 0.03f, 0.93f, 0.51f, 0.27f, // Vértice 11
+
+                0.10f, 0.27f, -0.03f, 0.24f, 0.79f, 0.38f, // Vértice 12
+                0.10f, 0.27f, 0.03f, 0.61f, 0.19f, 0.89f,  // Vértice 13
+                -0.10f, 0.27f, -0.03f, 0.78f, 0.56f, 0.33f, // Vértice 14
+                -0.10f, 0.27f, 0.03f, 0.47f, 0.67f, 0.12f,  // Vértice 15
+            };
+            indices_t = new uint[]
+            {
+                //Pantalla
+                    // Cara derecha
+                    0, 1, 3,
+                    0, 2, 3,
+
+                    // Cara izquierda
+                    4, 5, 7,
+                    4, 6, 7,
+
+                    // Cara trasera
+                    1, 5, 7,
+                    1, 3, 7,
+
+                    // Cara frontal
+                    0, 2, 6,
+                    0, 4, 6,
+
+                    // Cara superior
+                    1, 0, 4,
+                    1, 5, 4,
+
+                    // Cara inferior
+                    2, 3, 7,
+                    2, 6, 7,
+            };
+
 
             Dictionary<float[], uint[]> Monitor = new Dictionary<float[], uint[]>()
             {
-                { vertices_pantalla, indices_pan_sop }, { vertices_soporte, indices_pan_sop }, { vertices_base, indices_base }
+                { vertices_t_base, indices_t },  { vertices_t_arriba, indices_t },
             };
-            Dictionary<float[], uint[]> Mesa = new Dictionary<float[], uint[]>()
-            {
-                { vertices_mesa, indices_mesa }, { vertices_pata1, indices_patas }, { vertices_pata2, indices_patas }, { vertices_pata3, indices_patas }, { vertices_pata4, indices_patas }
-            };
-            Dictionary<float[], uint[]> Vaso = new Dictionary<float[], uint[]>()
-            {
-                { vertices_vaso, indices_vaso }
-            };
+            //Dictionary<float[], uint[]> Mesa = new Dictionary<float[], uint[]>()
+            //{
+            //    { vertices_mesa, indices_mesa }, { vertices_pata1, indices_patas }, { vertices_pata2, indices_patas }, { vertices_pata3, indices_patas }, { vertices_pata4, indices_patas }
+            //};
+            //Dictionary<float[], uint[]> Vaso = new Dictionary<float[], uint[]>()
+            //{
+            //    { vertices_vaso, indices_vaso }
+            //};
 
             objetos = new Dictionary<string, Dictionary<float[], uint[]>>()
             {
                 { "Monitor", Monitor },
-                { "Mesa", Mesa },
-                { "Vaso", Vaso }
+                //{ "Mesa", Mesa },
+                //{ "Vaso", Vaso }
             };
-
-
-            SerializarDic(Monitor, "Monitor");
-            SerializarDic(Mesa, "Mesa");
-            SerializarDic(Vaso, "Vaso");
 
         }
         protected override void OnLoad()
@@ -325,9 +376,9 @@ namespace OpenTKHolaMundo
             Console.Write(escenario1);
             escenario1.CargarEscenario();
 
-            view = Matrix4.CreateTranslation(0.0f, -0.15f, -1.5f);
+            view = Matrix4.CreateTranslation(0.0f, -0.15f, -0.5f);
             projection = Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(45.0f), Size.X / (float)Size.Y, 0.1f, 100.0f);
-
+            model = Matrix4.Identity;
         }
 
         protected override void OnUnload()
@@ -338,10 +389,33 @@ namespace OpenTKHolaMundo
         protected override void OnRenderFrame(FrameEventArgs args)
         {
             base.OnRenderFrame(args);
-            time += 8.0 * args.Time;
+            
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            Matrix4 model = Matrix4.CreateRotationY(MathHelper.DegreesToRadians((float)time));
+            if (KeyboardState.IsKeyDown(Keys.D))
+            {
+                model = Matrix4.CreateRotationY(MathHelper.DegreesToRadians((float)time));
+                time += 20.0 * args.Time;
+            } else
+            if (KeyboardState.IsKeyDown(Keys.A))
+            {
+                model = Matrix4.CreateRotationY(MathHelper.DegreesToRadians((float)time));
+                time -= 20.0 * args.Time;
+            } else
+            if (KeyboardState.IsKeyDown(Keys.S))
+            {
+                model = Matrix4.CreateRotationX(MathHelper.DegreesToRadians((float)time2));
+                time2 -= 20.0 * args.Time;
+            } else
+            if (KeyboardState.IsKeyDown(Keys.W))
+            {
+                model = Matrix4.CreateRotationX(MathHelper.DegreesToRadians((float)time2));
+                time2 += 20.0 * args.Time;
+            }
+
+
+            model = Matrix4.CreateRotationX(MathHelper.DegreesToRadians((float)time2)) * Matrix4.CreateRotationY(MathHelper.DegreesToRadians((float)time));
+
 
             shader.SetMatrix4("model", model);
             shader.SetMatrix4("view", view);
@@ -390,6 +464,32 @@ namespace OpenTKHolaMundo
 
             jsonObjeto = "{ \"0\": " + jsonObjeto + " }";
             File.WriteAllText("./jsons/"+name + ".json", jsonObjeto);
+        }
+
+        public void ControlsHor(FrameEventArgs args)
+        {
+            if (KeyboardState.IsKeyDown(Keys.D))
+            {
+                time += 16.0 * args.Time;
+            }
+
+            if (KeyboardState.IsKeyDown(Keys.A))
+            {
+                time -= 16.0 * args.Time;
+            }
+        }
+
+        public void ControlsVer(FrameEventArgs args)
+        {
+            if (KeyboardState.IsKeyDown(Keys.S))
+            {
+                time2 -= 16.0 * args.Time;
+            }
+
+            if (KeyboardState.IsKeyDown(Keys.W))
+            {
+                time2 += 16.0 * args.Time;
+            }
         }
     }
 
